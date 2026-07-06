@@ -385,19 +385,33 @@ const INTERVIEW_SECTIONS = [
   ]},
 ];
 
+const SIMPLE_LABELS = ['Not yet — this isn\'t me', 'Sometimes — I\'m working on it', 'Most of the time — I do this regularly', 'Yes, always — this is a strength'];
+
 const DIMENSIONS = [
-  { id:'t1', cat:'technical', name:'AI Tool Literacy',        desc:'Uses at least one AI tool (Copilot, ChatGPT, Gemini) with intentionality — knows how to prompt for useful outputs, not just experimentation.', labels:['None','Aware','Practitioner','Champion'] },
-  { id:'t2', cat:'technical', name:'Prompt Engineering',      desc:'Can write structured prompts with context, format instructions, and constraints. Able to iterate when output quality is poor.', labels:['None','Aware','Practitioner','Champion'] },
-  { id:'t3', cat:'technical', name:'Data Interpretation',     desc:'Can read AI-generated summaries, forecasts, or dashboards and critically assess accuracy — does not accept outputs at face value.', labels:['Developing','Competent','Proficient','Distinguished'] },
-  { id:'t4', cat:'technical', name:'Workflow Integration',    desc:'Has connected at least one AI tool into their daily workflow without prompting from manager — it has changed how they work.', labels:['None','Aware','Practitioner','Champion'] },
-  { id:'t5', cat:'technical', name:'AI Quality Control',      desc:'Reviews AI outputs before using them — consistently catches errors, hallucinations, or tone mismatches before sending to clients.', labels:['Developing','Competent','Proficient','Distinguished'] },
-  { id:'t6', cat:'technical', name:'Agent / Automation Concepts', desc:'Understands conceptually how AI agents work (input → processing → output) and can articulate what the agent needs to perform well.', labels:['None','Aware','Practitioner','Champion'] },
-  { id:'s1', cat:'soft', name:'Critical Thinking',       desc:'Evaluates AI suggestions with healthy skepticism — asks "why does this make sense?" before acting on recommendations.', labels:['Developing','Competent','Proficient','Distinguished'] },
-  { id:'s2', cat:'soft', name:'Complex Communication',   desc:'Engages at senior/C-suite level with contextually aware conversation — reads the room, adjusts register, builds narrative.', labels:['Developing','Competent','Proficient','Distinguished'] },
-  { id:'s3', cat:'soft', name:'Relationship Depth',      desc:'Maintains trusted-advisor status with clients — known, remembered, and sought out for perspective beyond the product.', labels:['Developing','Competent','Proficient','Distinguished'] },
-  { id:'s4', cat:'soft', name:'Adaptability',            desc:'Responds constructively to workflow changes — does not protect old habits when new tools demonstrably reduce friction.', labels:['Developing','Competent','Proficient','Distinguished'] },
-  { id:'s5', cat:'soft', name:'Sense-Making',            desc:'Synthesises insights across data, conversations, and trends into a coherent point of view — adds the "so what" layer AI lacks.', labels:['Developing','Competent','Proficient','Distinguished'] },
-  { id:'s6', cat:'soft', name:'Coaching Orientation',    desc:'Shares what works (prompts, shortcuts, approaches) with peers — multiplies team capability, not just personal productivity.', labels:['Developing','Competent','Proficient','Distinguished'] },
+  { id:'t1', cat:'technical', name:'AI Tool Use & Workflow',
+    desc:'I use AI tools (like ChatGPT, Copilot, or Gemini) regularly at work. It\'s part of how I do my job now, not just something I tried once.',
+    labels: SIMPLE_LABELS },
+  { id:'t2', cat:'technical', name:'Prompting & Output Quality',
+    desc:'I know how to ask AI the right way to get a useful answer. If the first answer isn\'t good, I know how to try again and make it better.',
+    labels: SIMPLE_LABELS },
+  { id:'t3', cat:'technical', name:'Checking AI Output',
+    desc:'When AI gives me a summary or report, I don\'t just accept it. I check if it makes sense before I use it.',
+    labels: SIMPLE_LABELS },
+  { id:'s1', cat:'soft', name:'Thinking It Through',
+    desc:'When AI suggests something, I stop and think before I act on it. I ask myself: does this actually make sense for my situation?',
+    labels: SIMPLE_LABELS },
+  { id:'s2', cat:'soft', name:'Talking to Senior People',
+    desc:'I\'m comfortable having conversations with senior people (like a CHRO or VP). I know how to adjust how I speak depending on who I\'m talking to.',
+    labels: SIMPLE_LABELS },
+  { id:'s3', cat:'soft', name:'Client Trust',
+    desc:'My clients trust me. They come back to me — not just when they need something, but when they want my opinion.',
+    labels: SIMPLE_LABELS },
+  { id:'s4', cat:'soft', name:'Trying New Ways of Working',
+    desc:'When there\'s a new way of doing things, I\'m willing to try it. I don\'t stick to old habits just because they\'re familiar.',
+    labels: SIMPLE_LABELS },
+  { id:'s5', cat:'soft', name:'Making Sense of Information',
+    desc:'I can look at different information — data, conversations, what\'s happening in the market — and put it together into a clear point of view. I don\'t just share facts, I explain what they mean.',
+    labels: SIMPLE_LABELS },
 ];
 
 const QUADRANTS = {
@@ -771,7 +785,7 @@ function renderRepDimensions(cat) {
     <div class="form-section">
       <div class="section-eyebrow">Step ${stepNum} of ${REP_TOTAL} · ${catLabel}</div>
       <div class="section-title">${catLabel}</div>
-      <div class="section-sub">Score yourself honestly. 1 = developing, 4 = distinguished. Add a note to give context — these help your manager calibrate fairly. ${cat==='technical'?'6 dimensions.':'6 dimensions.'}</div>
+      <div class="section-sub">Be honest — there are no wrong answers. Add a note if you want to give more context. ${cat==='technical'?'3 questions.':'5 questions.'}</div>
     </div>
     ${dims.map(d=>`
     <div class="rubric-card">
@@ -791,7 +805,7 @@ function renderRepDimensions(cat) {
         <textarea class="rubric-note" placeholder="Optional: context or example to support your score…" onchange="state.notes['${d.id}']=this.value">${state.notes[d.id]||''}</textarea>
       </div>
     </div>`).join('')}
-    <div id="dim-error" class="error-msg" style="display:none;margin-bottom:8px;">Please score all ${dims.length} dimensions before continuing.</div>
+    <div id="dim-error" class="error-msg" style="display:none;margin-bottom:8px;">Please answer all questions before continuing.</div>
     <div class="cta-row">
       <button class="cta-secondary" onclick="state.step--;renderRepStep()">← Back</button>
       <button class="cta-primary" onclick="repNextDims('${cat}')">${cat==='soft'?'Submit Assessment →':'Next: Soft Skills →'}</button>
@@ -844,8 +858,8 @@ async function renderRepSubmit() {
     if (error) throw error;
     await db.from('sessions').update({status:'rep_submitted', rep_name: state.repName}).eq('id',state.sessionId);
 
-    const techTotal = ['t1','t2','t3','t4','t5','t6'].reduce((a,k)=>a+(state.scores[k]||0),0);
-    const softTotal = ['s1','s2','s3','s4','s5','s6'].reduce((a,k)=>a+(state.scores[k]||0),0);
+    const techTotal = ['t1','t2','t3'].reduce((a,k)=>a+(state.scores[k]||0),0);
+    const softTotal = ['s1','s2','s3','s4','s5'].reduce((a,k)=>a+(state.scores[k]||0),0);
 
     document.getElementById('rep-body').innerHTML = `
       <div class="form-section">
@@ -853,8 +867,8 @@ async function renderRepSubmit() {
         <div class="section-title">Thank you, ${state.repName.split(' ')[0]}.</div>
         <div class="section-sub">Your self-assessment has been saved. Your manager will calibrate independently and unlock the joint debrief view. You'll review it together.</div>
         <div class="totals-row" style="margin-top:32px;">
-          <div class="total-card"><div class="total-label">Technical Score</div><div class="total-val" style="color:var(--accent2);">${techTotal}/24</div><div class="total-sub">6 dimensions · max 24</div></div>
-          <div class="total-card"><div class="total-label">Soft Skills Score</div><div class="total-val" style="color:var(--accent);">${softTotal}/24</div><div class="total-sub">6 dimensions · max 24</div></div>
+          <div class="total-card"><div class="total-label">Technical Score</div><div class="total-val" style="color:var(--accent2);">${techTotal}/12</div><div class="total-sub">3 dimensions · max 12</div></div>
+          <div class="total-card"><div class="total-label">Soft Skills Score</div><div class="total-val" style="color:var(--accent);">${softTotal}/20</div><div class="total-sub">5 dimensions · max 20</div></div>
           <div class="total-card"><div class="total-label">Session Code</div><div class="total-val" style="font-size:28px;letter-spacing:4px;">${state.sessionCode}</div><div class="total-sub">Share with your manager</div></div>
         </div>
         <div class="session-code-box" style="margin-top:0;">
@@ -938,7 +952,7 @@ function renderMgrDimensions(cat) {
     <div class="form-section">
       <div class="section-eyebrow">Step ${stepNum} of ${MGR_TOTAL} · Calibrating: ${state.calSession?.rep_name||'Rep'}</div>
       <div class="section-title">${catLabel}</div>
-      <div class="section-sub">Score <strong>${state.calSession?.rep_name||'the rep'}</strong> independently. You will not see their scores until after you submit. Add coaching notes per dimension — these appear in the debrief.</div>
+      <div class="section-sub">Score <strong>${state.calSession?.rep_name||'the rep'}</strong> independently. You won't see their scores until after you submit. Add coaching notes — these appear in the debrief. ${cat==='technical'?'3 dimensions.':'5 dimensions.'}</div>
     </div>
     ${dims.map(d=>`
     <div class="rubric-card">
@@ -958,7 +972,7 @@ function renderMgrDimensions(cat) {
         <textarea class="rubric-note" placeholder="Coaching note — specific example, development action, or context…" onchange="state.mgrNotes['${d.id}']=this.value">${state.mgrNotes[d.id]||''}</textarea>
       </div>
     </div>`).join('')}
-    <div id="mgr-dim-error" class="error-msg" style="display:none;margin-bottom:8px;">Please score all ${dims.length} dimensions.</div>
+    <div id="mgr-dim-error" class="error-msg" style="display:none;margin-bottom:8px;">Please score all dimensions before continuing.</div>
     <div class="cta-row">
       <button class="cta-secondary" onclick="state.step--;renderManagerStep()">← Back</button>
       <button class="cta-primary" onclick="mgrNextDims('${cat}')">${cat==='soft'?'Submit & View Debrief →':'Next: Soft Skills →'}</button>
@@ -1015,13 +1029,13 @@ function renderDebrief() {
   const rep = state.calRepData;
   const repScores = { t1:rep.t1_ai_tool_literacy, t2:rep.t2_prompt_engineering, t3:rep.t3_data_interpretation, t4:rep.t4_workflow_integration, t5:rep.t5_ai_quality_control, t6:rep.t6_agent_concepts, s1:rep.s1_critical_thinking, s2:rep.s2_complex_communication, s3:rep.s3_relationship_depth, s4:rep.s4_adaptability, s5:rep.s5_sense_making, s6:rep.s6_coaching_orientation };
 
-  const repTech = ['t1','t2','t3','t4','t5','t6'].reduce((a,k)=>a+(repScores[k]||0),0);
-  const repSoft = ['s1','s2','s3','s4','s5','s6'].reduce((a,k)=>a+(repScores[k]||0),0);
-  const mgrTech = ['t1','t2','t3','t4','t5','t6'].reduce((a,k)=>a+(state.mgrScores[k]||0),0);
-  const mgrSoft = ['s1','s2','s3','s4','s5','s6'].reduce((a,k)=>a+(state.mgrScores[k]||0),0);
+  const repTech = ['t1','t2','t3'].reduce((a,k)=>a+(repScores[k]||0),0);
+  const repSoft = ['s1','s2','s3','s4','s5'].reduce((a,k)=>a+(repScores[k]||0),0);
+  const mgrTech = ['t1','t2','t3'].reduce((a,k)=>a+(state.mgrScores[k]||0),0);
+  const mgrSoft = ['s1','s2','s3','s4','s5'].reduce((a,k)=>a+(state.mgrScores[k]||0),0);
 
   // Quadrant based on MANAGER scores (calibrated view)
-  const quadrant = mgrTech>=18&&mgrSoft>=18?'accelerator':mgrTech<14&&mgrSoft>=18?'relationship':mgrTech>=18&&mgrSoft<14?'poweruser':'foundation';
+  const quadrant = mgrTech>=9&&mgrSoft>=15?'accelerator':mgrTech<7&&mgrSoft>=15?'relationship':mgrTech>=9&&mgrSoft<12?'poweruser':'foundation';
   const q = QUADRANTS[quadrant]; const lp = LEARNING_PATHS[quadrant];
 
   function deltaTag(r,m) {
@@ -1062,7 +1076,7 @@ function renderDebrief() {
           <div style="font-size:20px;color:var(--dim);font-family:var(--narrow);">/</div>
           <div class="total-val" style="color:var(--accent);">${mgrTech}</div>
         </div>
-        <div class="total-sub">out of 24 each</div>
+        <div class="total-sub">out of 12 each · 3 dimensions</div>
       </div>
       <div class="total-card">
         <div class="total-label">Soft Skills — Rep / Mgr</div>
@@ -1071,7 +1085,7 @@ function renderDebrief() {
           <div style="font-size:20px;color:var(--dim);font-family:var(--narrow);">/</div>
           <div class="total-val" style="color:var(--accent);">${mgrSoft}</div>
         </div>
-        <div class="total-sub">out of 24 each</div>
+        <div class="total-sub">out of 20 each · 5 dimensions</div>
       </div>
       <div class="total-card">
         <div class="total-label">Session</div>
