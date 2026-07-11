@@ -84,6 +84,15 @@ body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height
 .select-chip .chip-name{font-size:12px;font-weight:500;color:var(--ink);}
 .market-group-label{font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);grid-column:1/-1;padding-top:8px;}
 
+/* ── TOGGLE (assessor type) ── */
+.toggle-row{display:flex;gap:10px;margin-bottom:24px;}
+.toggle-chip{flex:1;padding:16px 18px;border:1.5px solid var(--rule);background:var(--surface);cursor:pointer;transition:all 0.15s;}
+.toggle-chip:hover{border-color:var(--ink);}
+.toggle-chip.selected{border-color:var(--accent2);background:rgba(26,77,200,0.05);}
+.toggle-chip .toggle-title{font-weight:700;font-size:14px;margin-bottom:4px;}
+.toggle-chip.selected .toggle-title{color:var(--accent2);}
+.toggle-chip .toggle-desc{font-size:11.5px;color:var(--mid);line-height:1.5;}
+
 /* ── TEXT INPUTS ── */
 .field{margin-bottom:20px;}
 .field label{font-family:var(--narrow);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:6px;}
@@ -128,29 +137,7 @@ body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height
 .rubric-note:focus{border-color:var(--ink);color:var(--ink);}
 .rubric-note::placeholder{color:var(--dim);}
 
-/* ── SESSION CODE ── */
-.session-code-box{background:var(--ink);color:var(--paper);padding:32px 36px;margin:24px 0;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.session-code-val{font-family:var(--narrow);font-size:44px;font-weight:700;letter-spacing:8px;color:var(--paper);}
-.session-code-label{font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
-.copy-btn{font-family:var(--narrow);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:10px 20px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:var(--paper);cursor:pointer;transition:all 0.15s;white-space:nowrap;}
-.copy-btn:hover{background:rgba(255,255,255,0.15);}
-
-/* ── DEBRIEF ── */
-.debrief-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);background:var(--surface);margin-bottom:24px;}
-.debrief-col-header{padding:14px 20px;border-bottom:1px solid var(--rule);font-family:var(--narrow);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
-.debrief-col-header:first-child{border-right:1px solid var(--rule);}
-.debrief-row{display:contents;}
-.debrief-cell{padding:12px 20px;border-bottom:1px solid var(--warm);font-size:13px;}
-.debrief-cell.left{border-right:1px solid var(--rule);}
-.debrief-cell .dim-name{font-weight:600;font-size:12px;color:var(--mid);margin-bottom:4px;font-family:var(--narrow);letter-spacing:0.5px;text-transform:uppercase;}
-.debrief-scores{display:flex;align-items:center;gap:10px;margin-top:4px;}
-.score-pill{font-family:var(--narrow);font-size:20px;font-weight:700;}
-.score-pill.rep{color:var(--accent2);}
-.score-pill.mgr{color:var(--accent);}
-.delta-badge{font-family:var(--narrow);font-size:11px;font-weight:700;padding:3px 8px;border-radius:2px;}
-.delta-agree{background:rgba(26,107,60,0.1);color:var(--green);}
-.delta-gap{background:rgba(184,120,0,0.1);color:var(--amber);}
-.delta-big{background:rgba(200,64,26,0.1);color:var(--accent);}
+/* ── MATRIX RESULT ── */
 .quadrant-box{padding:32px;border:1px solid var(--rule);background:var(--warm);margin-bottom:24px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;}
 .quadrant-icon{font-size:48px;line-height:1;}
 .quadrant-label{font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:6px;}
@@ -160,6 +147,12 @@ body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height
 .path-label{font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:6px;}
 .path-title{font-size:16px;font-weight:700;margin-bottom:8px;}
 .path-desc{font-size:13px;color:var(--mid);line-height:1.6;}
+
+.dim-result-row{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--warm);background:var(--surface);}
+.dim-result-row:last-child{border-bottom:none;}
+.dim-result-name{font-weight:600;font-size:13px;}
+.dim-result-note{font-size:12px;color:var(--mid);margin-top:3px;line-height:1.5;}
+.dim-result-score{font-family:var(--narrow);font-size:22px;font-weight:700;color:var(--accent);}
 
 /* ── TOTALS BAR ── */
 .totals-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px;}
@@ -198,13 +191,9 @@ body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height
   .land-header{padding:20px 24px;}
   .form-topbar,.form-body{padding-left:20px;padding-right:20px;}
   .form-body{padding-top:32px;}
-  .debrief-grid{grid-template-columns:1fr;}
-  .debrief-cell.left{border-right:none;}
-  .debrief-col-header:first-child{border-right:none;}
   .totals-row{grid-template-columns:1fr;}
-  .session-code-box{flex-direction:column;align-items:flex-start;}
-  .session-code-val{font-size:32px;letter-spacing:4px;}
   .quadrant-box{grid-template-columns:1fr;}
+  .toggle-row{flex-direction:column;}
 }
 </style>
 </head>
@@ -219,29 +208,23 @@ body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height
   </div>
   <div class="land-left">
     <div class="land-eyebrow">Change Management Framework</div>
-    <h1 class="land-title">Assess.<br><em>Calibrate.</em><br>Develop.</h1>
-    <p class="land-body">A structured platform for understanding how AI can augment customer-facing roles across APAC — and building the skills to get there. Manager-led interviews, rep self-assessments, and joint debrief views in one place.</p>
-    <div style="font-size:11px;color:var(--dim);font-family:var(--narrow);letter-spacing:0.5px;">LinkedIn Talent Solutions · Internal Use Only · Prototype v1</div>
+    <h1 class="land-title">Assess.<br><em>Understand.</em><br>Develop.</h1>
+    <p class="land-body">A structured platform for understanding how AI can augment customer-facing roles across APAC — and building the skills to get there. Run a task-inventory interview, then generate the AI Applicability Matrix straight from a self- or manager-assessment — no codes, no waiting on the other side.</p>
+    <div style="font-size:11px;color:var(--dim);font-family:var(--narrow);letter-spacing:0.5px;">LinkedIn Talent Solutions · Internal Use Only · Prototype v2</div>
   </div>
   <div class="land-right">
     <div style="font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:4px;">Choose your flow</div>
     <div class="land-card accent-red" onclick="startFlow('interview')">
       <div class="land-card-num">Module 01</div>
       <div class="land-card-title">Role Interview Checklist</div>
-      <div class="land-card-desc">Run a structured task inventory interview for a specific role and market. Captures AI opportunity areas and generates the Applicability Matrix.</div>
+      <div class="land-card-desc">Run a structured task inventory interview for a specific role and market. Captures qualitative AI opportunity areas — no scoring.</div>
       <div class="land-card-who">👤 Manager</div>
     </div>
-    <div class="land-card accent-blue" onclick="startFlow('rep')">
+    <div class="land-card accent-blue" onclick="startFlow('assessment')">
       <div class="land-card-num">Module 02</div>
-      <div class="land-card-title">Rep Self-Assessment</div>
-      <div class="land-card-desc">Score yourself across 12 technical and soft skill dimensions. Generates a session code for your manager to calibrate against.</div>
-      <div class="land-card-who">👤 Rep</div>
-    </div>
-    <div class="land-card accent-green" onclick="startFlow('manager')">
-      <div class="land-card-num">Module 03</div>
-      <div class="land-card-title">Manager Calibration</div>
-      <div class="land-card-desc">Enter a rep's session code, score independently, then unlock the joint debrief view with delta analysis and learning path recommendation.</div>
-      <div class="land-card-who">👤 Manager</div>
+      <div class="land-card-title">AI Readiness Assessment</div>
+      <div class="land-card-desc">Score across 8 technical and soft skill dimensions — filled in by the rep themselves or by their manager. The AI Applicability Matrix generates immediately on submit.</div>
+      <div class="land-card-who">👤 Rep or Manager</div>
     </div>
   </div>
 </div>
@@ -264,37 +247,20 @@ body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height
 </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════════ REP ASSESSMENT -->
-<div id="page-rep" class="page">
+<!-- ══════════════════════════════════════════════════════════════════ AI READINESS ASSESSMENT -->
+<div id="page-assessment" class="page">
 <div class="form-chrome">
   <div class="form-topbar">
     <div class="form-topbar-left">
       <button class="back-btn" onclick="goHome()">← Back</button>
       <div>
-        <div class="topbar-title">Rep Self-Assessment</div>
-        <div class="topbar-meta">Module 02 · Rep</div>
+        <div class="topbar-title">AI Readiness Assessment</div>
+        <div class="topbar-meta">Module 02 · Rep or Manager</div>
       </div>
     </div>
-    <div class="step-indicator" id="rep-steps"></div>
+    <div class="step-indicator" id="asm-steps"></div>
   </div>
-  <div class="form-body" id="rep-body"></div>
-</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════════════ MANAGER CALIBRATION -->
-<div id="page-manager" class="page">
-<div class="form-chrome">
-  <div class="form-topbar">
-    <div class="form-topbar-left">
-      <button class="back-btn" onclick="goHome()">← Back</button>
-      <div>
-        <div class="topbar-title">Manager Calibration</div>
-        <div class="topbar-meta">Module 03 · Manager</div>
-      </div>
-    </div>
-    <div class="step-indicator" id="mgr-steps"></div>
-  </div>
-  <div class="form-body" id="manager-body"></div>
+  <div class="form-body" id="assessment-body"></div>
 </div>
 </div>
 
@@ -389,28 +355,28 @@ const SIMPLE_LABELS = ['Not yet — this isn\'t me', 'Sometimes — I\'m working
 
 const DIMENSIONS = [
   { id:'t1', cat:'technical', name:'AI Tool Use & Workflow',
-    desc:'I use AI tools (like ChatGPT, Copilot, or Gemini) regularly at work. It\'s part of how I do my job now, not just something I tried once.',
+    desc:'Uses AI tools (like ChatGPT, Copilot, or Gemini) regularly at work. It\'s part of how the job gets done now, not just something tried once.',
     labels: SIMPLE_LABELS },
   { id:'t2', cat:'technical', name:'Prompting & Output Quality',
-    desc:'I know how to ask AI the right way to get a useful answer. If the first answer isn\'t good, I know how to try again and make it better.',
+    desc:'Knows how to ask AI the right way to get a useful answer. If the first answer isn\'t good, knows how to try again and make it better.',
     labels: SIMPLE_LABELS },
   { id:'t3', cat:'technical', name:'Checking AI Output',
-    desc:'When AI gives me a summary or report, I don\'t just accept it. I check if it makes sense before I use it.',
+    desc:'When AI gives a summary or report, doesn\'t just accept it — checks that it makes sense before using it.',
     labels: SIMPLE_LABELS },
   { id:'s1', cat:'soft', name:'Thinking It Through',
-    desc:'When AI suggests something, I stop and think before I act on it. I ask myself: does this actually make sense for my situation?',
+    desc:'When AI suggests something, stops and thinks before acting on it. Asks: does this actually make sense for the situation?',
     labels: SIMPLE_LABELS },
   { id:'s2', cat:'soft', name:'Talking to Senior People',
-    desc:'I\'m comfortable having conversations with senior people (like a CHRO or VP). I know how to adjust how I speak depending on who I\'m talking to.',
+    desc:'Comfortable having conversations with senior people (like a CHRO or VP). Knows how to adjust tone depending on who they\'re talking to.',
     labels: SIMPLE_LABELS },
   { id:'s3', cat:'soft', name:'Client Trust',
-    desc:'My clients trust me. They come back to me — not just when they need something, but when they want my opinion.',
+    desc:'Clients trust them. They come back — not just when they need something, but when they want an opinion.',
     labels: SIMPLE_LABELS },
   { id:'s4', cat:'soft', name:'Trying New Ways of Working',
-    desc:'When there\'s a new way of doing things, I\'m willing to try it. I don\'t stick to old habits just because they\'re familiar.',
+    desc:'When there\'s a new way of doing things, willing to try it. Doesn\'t stick to old habits just because they\'re familiar.',
     labels: SIMPLE_LABELS },
   { id:'s5', cat:'soft', name:'Making Sense of Information',
-    desc:'I can look at different information — data, conversations, what\'s happening in the market — and put it together into a clear point of view. I don\'t just share facts, I explain what they mean.',
+    desc:'Can look at different information — data, conversations, what\'s happening in the market — and put it together into a clear point of view, not just share facts.',
     labels: SIMPLE_LABELS },
 ];
 
@@ -423,7 +389,7 @@ const QUADRANTS = {
 
 const LEARNING_PATHS = {
   accelerator:  { label:'Path D', title:'AI Accelerator Path', desc:'Strategic AI thinking, change leadership, and internal champion role. Lead agent build, run team workshops, mentor Foundation Builders.' },
-  relationship: { label:'Path B', title:'Relationship Expert Path', desc:'Reframe AI as your research analyst. Build prompt fluency using client context. Develop data literacy. Elevate C-suite storytelling with AI intel.' },
+  relationship: { label:'Path B', title:'Relationship Expert Path', desc:'Reframe AI as a research analyst. Build prompt fluency using client context. Develop data literacy. Elevate C-suite storytelling with AI intel.' },
   poweruser:    { label:'Path C', title:'Tool Power User Path', desc:'Deep-dive into consultative selling and active listening. Build the human layer. Teach peers what you know — become an internal multiplier.' },
   foundation:   { label:'Path A', title:'Foundation Builder Path', desc:'Start with one tool, one task, mastered. Build communication confidence in parallel. Integrate AI into one real client interaction before expanding.' },
 };
@@ -435,20 +401,20 @@ let state = {
   flow: null,
   step: 0,
   role: null, market: null,
-  managerName: '', repName: '',
-  interviewNotes: {},   // section_index -> {q_index -> note}
-  scores: {},           // dim_id -> score (1-4)
-  notes: {},            // dim_id -> note text
-  sessionCode: null, sessionId: null,
-  calSession: null,     // session loaded for calibration
-  mgrScores: {}, mgrNotes: {}, coachingSummary: '',
+  managerName: '',            // interview module only
+  interviewNotes: {},         // section_index -> {q_index -> note}
+  assessedName: '',           // person the assessment is about
+  assessorType: 'self',       // 'self' | 'manager'
+  assessorName: '',           // manager's name, when assessorType === 'manager'
+  scores: {},                 // dim_id -> score (1-4)
+  notes: {},                  // dim_id -> note text
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
 // NAV
 // ─────────────────────────────────────────────────────────────────────────────
 function goHome() {
-  state = { flow:null,step:0,role:null,market:null,managerName:'',repName:'',interviewNotes:{},scores:{},notes:{},sessionCode:null,sessionId:null,calSession:null,mgrScores:{},mgrNotes:{},coachingSummary:'' };
+  state = { flow:null,step:0,role:null,market:null,managerName:'',interviewNotes:{},assessedName:'',assessorType:'self',assessorName:'',scores:{},notes:{} };
   showPage('landing');
 }
 function showPage(id) {
@@ -459,7 +425,7 @@ function showPage(id) {
 function startFlow(flow) {
   state.flow = flow;
   state.step = 0;
-  showPage(flow==='interview'?'interview':flow==='rep'?'rep':'manager');
+  showPage(flow);
   renderStep();
 }
 
@@ -474,38 +440,27 @@ function setSteps(containerId, total, current) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SHARED: ROLE + MARKET PICKER
+// SHARED: ROLE + MARKET CHIPS (renders into a target element, no wrapper chrome)
 // ─────────────────────────────────────────────────────────────────────────────
-function renderRoleMarketPicker(bodyId, stepsId, totalSteps, onNext) {
-  setSteps(stepsId, totalSteps, 0);
-  const el = document.getElementById(bodyId);
-  el.innerHTML = `
-    <div class="form-section">
-      <div class="section-eyebrow">Step 1 of ${totalSteps}</div>
-      <div class="section-title">Role & Market</div>
-      <div class="section-sub">Select the role being assessed and the market. This customises the questions and context for this interview.</div>
-      <div style="font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Role</div>
-      <div class="select-grid" style="grid-template-columns:repeat(5,1fr);" id="role-grid">
-        ${ROLES.map(r=>`<div class="select-chip ${state.role===r.id?'selected':''}" onclick="pickRole('${r.id}')">
-          <span class="chip-label">${r.label}</span>
-          <span class="chip-name">${r.name.split(' ')[0]}</span>
-        </div>`).join('')}
-      </div>
-      <div style="font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-top:24px;margin-bottom:10px;">Market</div>
-      <div class="select-grid" id="market-grid">
-        <div class="market-group-label">Developed</div>
-        ${MARKETS.developed.map(m=>`<div class="select-chip ${state.market===m.id?'selected':''}" onclick="pickMarket('${m.id}')">
-          <span class="chip-label">${m.label}</span><span class="chip-name">${m.name}</span>
-        </div>`).join('')}
-        <div class="market-group-label">Emerging</div>
-        ${MARKETS.emerging.map(m=>`<div class="select-chip ${state.market===m.id?'selected':''}" onclick="pickMarket('${m.id}')">
-          <span class="chip-label">${m.label}</span><span class="chip-name">${m.name}</span>
-        </div>`).join('')}
-      </div>
-      <div id="role-market-error" class="error-msg" style="display:none;">Please select both a role and a market.</div>
+function roleMarketChipsHtml() {
+  return `
+    <div style="font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Role</div>
+    <div class="select-grid" style="grid-template-columns:repeat(5,1fr);" id="role-grid">
+      ${ROLES.map(r=>`<div class="select-chip ${state.role===r.id?'selected':''}" onclick="pickRole('${r.id}')">
+        <span class="chip-label">${r.label}</span>
+        <span class="chip-name">${r.name.split(' ')[0]}</span>
+      </div>`).join('')}
     </div>
-    <div class="cta-row">
-      <button class="cta-primary" onclick="${onNext}">Continue →</button>
+    <div style="font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-top:24px;margin-bottom:10px;">Market</div>
+    <div class="select-grid" id="market-grid">
+      <div class="market-group-label">Developed</div>
+      ${MARKETS.developed.map(m=>`<div class="select-chip ${state.market===m.id?'selected':''}" onclick="pickMarket('${m.id}')">
+        <span class="chip-label">${m.label}</span><span class="chip-name">${m.name}</span>
+      </div>`).join('')}
+      <div class="market-group-label">Emerging</div>
+      ${MARKETS.emerging.map(m=>`<div class="select-chip ${state.market===m.id?'selected':''}" onclick="pickMarket('${m.id}')">
+        <span class="chip-label">${m.label}</span><span class="chip-name">${m.name}</span>
+      </div>`).join('')}
     </div>`;
 }
 function pickRole(id) {
@@ -518,36 +473,43 @@ function pickMarket(id) {
   document.querySelectorAll('#market-grid .select-chip').forEach(c=>c.classList.remove('selected'));
   event.currentTarget.classList.add('selected');
 }
-function validateRoleMarket() {
-  if (!state.role || !state.market) {
-    document.getElementById('role-market-error').style.display='block'; return false;
-  }
-  document.getElementById('role-market-error').style.display='none'; return true;
-}
 function getRoleName() { return ROLES.find(r=>r.id===state.role)?.name || state.role; }
 function getMarketName() {
   return [...MARKETS.developed,...MARKETS.emerging].find(m=>m.id===state.market)?.name || state.market;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ══ INTERVIEW FLOW ══
+// ══ INTERVIEW FLOW (Module 01 — qualitative, unchanged in structure) ══
 // ─────────────────────────────────────────────────────────────────────────────
 // Steps: 0=role/market, 1=manager info, 2-7=6 sections, 8=submit/done
 const INT_TOTAL = 9;
 
 function renderStep() {
   if (state.flow==='interview') renderInterviewStep();
-  else if (state.flow==='rep') renderRepStep();
-  else if (state.flow==='manager') renderManagerStep();
+  else if (state.flow==='assessment') renderAssessmentStep();
 }
 
 function renderInterviewStep() {
   const s = state.step;
-  if (s===0) { renderRoleMarketPicker('interview-body','int-steps',INT_TOTAL,'intNext()'); return; }
-  if (s===1) renderInterviewInfo();
+  if (s===0) renderInterviewRoleMarket();
+  else if (s===1) renderInterviewInfo();
   else if (s>=2 && s<=7) renderInterviewSection(s-2);
   else if (s===8) renderInterviewDone();
   setSteps('int-steps', INT_TOTAL, s);
+}
+
+function renderInterviewRoleMarket() {
+  document.getElementById('interview-body').innerHTML = `
+    <div class="form-section">
+      <div class="section-eyebrow">Step 1 of ${INT_TOTAL}</div>
+      <div class="section-title">Role & Market</div>
+      <div class="section-sub">Select the role being interviewed and the market. This customises the questions and context for this interview.</div>
+      ${roleMarketChipsHtml()}
+      <div id="role-market-error" class="error-msg" style="display:none;">Please select both a role and a market.</div>
+    </div>
+    <div class="cta-row">
+      <button class="cta-primary" onclick="intNext()">Continue →</button>
+    </div>`;
 }
 
 function renderInterviewInfo() {
@@ -559,7 +521,7 @@ function renderInterviewInfo() {
       <div class="field"><label>Your Name (Manager)</label><input id="mgr-name-input" type="text" value="${state.managerName}" placeholder="e.g. Carol Tan" oninput="state.managerName=this.value"></div>
       <div class="notice">
         <strong>Interview Guide</strong>
-        6 sections · ~45–60 minutes. Add notes to any question as you interview. All responses are saved to Supabase when you submit. You can revisit this session later.
+        6 sections · ~45–60 minutes. Add notes to any question as you interview. All responses are saved to Supabase when you submit.
       </div>
     </div>
     <div class="cta-row">
@@ -622,7 +584,6 @@ async function renderInterviewDone() {
       <div style="margin-top:24px;"><span class="spinner"></span> Saving to database…</div>
     </div>`;
 
-  // Build section notes strings
   const buildSection = (idx) => {
     const sec = INTERVIEW_SECTIONS[idx];
     const notes = state.interviewNotes[idx] || {};
@@ -630,19 +591,9 @@ async function renderInterviewDone() {
   };
 
   try {
-    // Create session
-    const code = Math.random().toString(36).substring(2,8).toUpperCase();
-    const { data: sess, error: sessErr } = await db.from('sessions').insert({
-      session_code: code, role: state.role, market: state.market,
-      manager_name: state.managerName, status: 'interview_done'
-    }).select().single();
-    if (sessErr) throw sessErr;
-
-    state.sessionId = sess.id; state.sessionCode = code;
-
-    // Save interview responses
+    // No session code — interview responses are saved standalone.
     const { error: intErr } = await db.from('interview_responses').insert({
-      session_id: sess.id, role: state.role, market: state.market,
+      role: state.role, market: state.market,
       manager_name: state.managerName,
       section_1: buildSection(0), section_2: buildSection(1),
       section_3: buildSection(2), section_4: buildSection(3),
@@ -654,20 +605,14 @@ async function renderInterviewDone() {
       <div class="form-section">
         <div class="section-eyebrow">✓ Interview Complete</div>
         <div class="section-title">Saved Successfully</div>
-        <div class="section-sub">The interview for <strong>${getRoleName()}</strong> in <strong>${getMarketName()}</strong> has been recorded. Share the session code below with the rep — they'll use it to link their self-assessment to this interview.</div>
-        <div class="session-code-box">
-          <div>
-            <div class="session-code-label">Session Code — share with rep</div>
-            <div class="session-code-val">${code}</div>
-          </div>
-          <button class="copy-btn" onclick="copyCode('${code}')">Copy Code</button>
-        </div>
+        <div class="section-sub">The interview for <strong>${getRoleName()}</strong> in <strong>${getMarketName()}</strong> has been recorded.</div>
         <div class="notice success-notice">
-          <strong>Next step</strong> Send this code to the rep. They select "Rep Self-Assessment" and enter this code to begin. Once they submit, you'll use Module 03 to calibrate and unlock the debrief.
+          <strong>Next step</strong> Want a scored AI Applicability Matrix for this rep? Run Module 02 — either the rep scores themselves, or you score them directly. It generates the matrix immediately, no code needed.
         </div>
       </div>
       <div class="cta-row">
-        <button class="cta-primary" onclick="goHome()">Back to Home</button>
+        <button class="cta-primary" onclick="startFlow('assessment')">Go to Module 02 →</button>
+        <button class="cta-secondary" onclick="goHome()">Back to Home</button>
       </div>`;
   } catch(e) {
     document.getElementById('interview-body').innerHTML = `
@@ -682,110 +627,90 @@ async function renderInterviewDone() {
 }
 
 function intNext() {
-  if (state.step===0 && !validateRoleMarket()) return;
+  if (state.step===0 && (!state.role || !state.market)) {
+    document.getElementById('role-market-error').style.display='block'; return;
+  }
   if (state.step===1 && !state.managerName.trim()) { alert('Please enter your name.'); return; }
   state.step++;
   renderInterviewStep();
   window.scrollTo(0,0);
 }
-function copyCode(code) {
-  navigator.clipboard.writeText(code).then(()=>{
-    const btn = document.querySelector('.copy-btn');
-    if(btn){btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy Code',2000);}
-  });
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ══ REP ASSESSMENT FLOW ══
+// ══ AI READINESS ASSESSMENT FLOW (Module 02 — merged rep/manager, no codes) ══
 // ─────────────────────────────────────────────────────────────────────────────
-// Steps: 0=code+info, 1=technical dims, 2=soft dims, 3=submit/done
-const REP_TOTAL = 4;
+// Steps: 0=who/role/market, 1=technical dims, 2=soft dims, 3=submit+matrix
+const ASM_TOTAL = 4;
 
-function renderRepStep() {
-  setSteps('rep-steps', REP_TOTAL, state.step);
+function renderAssessmentStep() {
+  setSteps('asm-steps', ASM_TOTAL, state.step);
   const s = state.step;
-  if (s===0) renderRepInfo();
-  else if (s===1) renderRepDimensions('technical');
-  else if (s===2) renderRepDimensions('soft');
-  else if (s===3) renderRepSubmit();
+  if (s===0) renderAssessmentInfo();
+  else if (s===1) renderAssessmentDimensions('technical');
+  else if (s===2) renderAssessmentDimensions('soft');
+  else if (s===3) renderAssessmentSubmit();
 }
 
-function renderRepInfo() {
-  document.getElementById('rep-body').innerHTML = `
+function renderAssessmentInfo() {
+  document.getElementById('assessment-body').innerHTML = `
     <div class="form-section">
-      <div class="section-eyebrow">Step 1 of ${REP_TOTAL}</div>
-      <div class="section-title">Your Details</div>
-      <div class="section-sub">Enter your name, role, and market. You'll get a session code at the end — share it with your manager so they can calibrate and unlock the joint debrief.</div>
-      <div class="field"><label>Your Name</label><input id="rep-name-input" type="text" placeholder="e.g. Alex Tan" value="${state.repName}" oninput="state.repName=this.value"></div>
-      <div style="font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:10px;margin-top:8px;">Your Role</div>
-      <div class="select-grid" style="grid-template-columns:repeat(5,1fr);" id="role-grid">
-        ${ROLES.map(r=>`<div class="select-chip ${state.role===r.id?'selected':''}" onclick="pickRole('${r.id}')">
-          <span class="chip-label">${r.label}</span><span class="chip-name">${r.name.split(' ')[0]}</span>
-        </div>`).join('')}
+      <div class="section-eyebrow">Step 1 of ${ASM_TOTAL}</div>
+      <div class="section-title">Who's being assessed?</div>
+      <div class="section-sub">Score across 8 dimensions. The AI Applicability Matrix generates the moment you submit — no session code, no waiting on a second person.</div>
+      <div style="font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Who's completing this assessment?</div>
+      <div class="toggle-row" id="assessor-toggle">
+        <div class="toggle-chip ${state.assessorType==='self'?'selected':''}" onclick="pickAssessorType('self')">
+          <div class="toggle-title">Self</div>
+          <div class="toggle-desc">I'm the rep, scoring myself.</div>
+        </div>
+        <div class="toggle-chip ${state.assessorType==='manager'?'selected':''}" onclick="pickAssessorType('manager')">
+          <div class="toggle-title">Manager</div>
+          <div class="toggle-desc">I'm scoring a rep on my team.</div>
+        </div>
       </div>
-      <div style="font-family:var(--narrow);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-top:24px;margin-bottom:10px;">Your Market</div>
-      <div class="select-grid" id="market-grid">
-        <div class="market-group-label">Developed</div>
-        ${MARKETS.developed.map(m=>`<div class="select-chip ${state.market===m.id?'selected':''}" onclick="pickMarket('${m.id}')">
-          <span class="chip-label">${m.label}</span><span class="chip-name">${m.name}</span>
-        </div>`).join('')}
-        <div class="market-group-label">Emerging</div>
-        ${MARKETS.emerging.map(m=>`<div class="select-chip ${state.market===m.id?'selected':''}" onclick="pickMarket('${m.id}')">
-          <span class="chip-label">${m.label}</span><span class="chip-name">${m.name}</span>
-        </div>`).join('')}
-      </div>
-      <div id="rep-error" class="error-msg" style="display:none;margin-top:12px;"></div>
+      <div class="field"><label id="assessed-name-label">${state.assessorType==='manager'?"Rep's Name":'Your Name'}</label><input id="assessed-name-input" type="text" placeholder="e.g. Alex Tan" value="${state.assessedName}" oninput="state.assessedName=this.value"></div>
+      <div class="field" id="assessor-name-field" style="display:${state.assessorType==='manager'?'block':'none'};"><label>Your Name (Manager)</label><input id="assessor-name-input" type="text" placeholder="e.g. Carol Tan" value="${state.assessorName}" oninput="state.assessorName=this.value"></div>
+      ${roleMarketChipsHtml()}
+      <div id="asm-error" class="error-msg" style="display:none;margin-top:12px;"></div>
       <div class="notice" style="margin-top:24px;">
         <strong>How this works</strong>
-        Score yourself 1–4 across 12 dimensions. Your manager scores you independently — neither sees the other's scores until after both submit. You'll get a session code at the end to share with your manager.
+        Score 1–4 across 12 questions (3 technical, 5 soft). On submit, you'll see the AI Applicability Matrix immediately — quadrant placement and recommended learning path.
       </div>
     </div>
     <div class="cta-row">
-      <button class="cta-primary" onclick="repValidateAndNext()">Start Assessment →</button>
+      <button class="cta-primary" onclick="asmValidateAndNext()">Start Scoring →</button>
     </div>`;
 }
 
-async function repValidateAndNext() {
-  const name = state.repName.trim();
-  const errEl = document.getElementById('rep-error');
-  if (!name) { errEl.textContent='Please enter your name.'; errEl.style.display='block'; return; }
-  if (!state.role) { errEl.textContent='Please select your role.'; errEl.style.display='block'; return; }
-  if (!state.market) { errEl.textContent='Please select your market.'; errEl.style.display='block'; return; }
-
-  errEl.textContent='Creating session…'; errEl.style.display='block'; errEl.style.color='var(--mid)';
-
-  try {
-    // Rep creates their own session
-    const code = Math.random().toString(36).substring(2,8).toUpperCase();
-    const {data: sess, error: sessErr} = await db.from('sessions').insert({
-      session_code: code,
-      role: state.role,
-      market: state.market,
-      rep_name: name,
-      status: 'pending',
-    }).select().single();
-    if (sessErr) throw sessErr;
-
-    state.sessionId = sess.id;
-    state.sessionCode = code;
-    errEl.style.display='none';
-    state.step++; renderRepStep(); window.scrollTo(0,0);
-  } catch(e) {
-    errEl.textContent = 'Could not create session: ' + e.message;
-    errEl.style.color = 'var(--accent)';
-    errEl.style.display = 'block';
-  }
+function pickAssessorType(type) {
+  state.assessorType = type;
+  document.querySelectorAll('#assessor-toggle .toggle-chip').forEach(c=>c.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  document.getElementById('assessed-name-label').textContent = type==='manager' ? "Rep's Name" : 'Your Name';
+  document.getElementById('assessor-name-field').style.display = type==='manager' ? 'block' : 'none';
 }
 
-function renderRepDimensions(cat) {
+function asmValidateAndNext() {
+  const errEl = document.getElementById('asm-error');
+  const name = state.assessedName.trim();
+  if (!name) { errEl.textContent = state.assessorType==='manager' ? "Please enter the rep's name." : 'Please enter your name.'; errEl.style.display='block'; return; }
+  if (state.assessorType==='manager' && !state.assessorName.trim()) { errEl.textContent='Please enter your name (manager).'; errEl.style.display='block'; return; }
+  if (!state.role) { errEl.textContent='Please select a role.'; errEl.style.display='block'; return; }
+  if (!state.market) { errEl.textContent='Please select a market.'; errEl.style.display='block'; return; }
+  errEl.style.display='none';
+  state.step++; renderAssessmentStep(); window.scrollTo(0,0);
+}
+
+function renderAssessmentDimensions(cat) {
   const dims = DIMENSIONS.filter(d=>d.cat===cat);
   const stepNum = cat==='technical'?2:3;
   const catLabel = cat==='technical'?'Technical AI Fluency':'Soft Skills';
-  document.getElementById('rep-body').innerHTML = `
+  const subject = state.assessorType==='manager' ? state.assessedName.split(' ')[0] : 'yourself';
+  document.getElementById('assessment-body').innerHTML = `
     <div class="form-section">
-      <div class="section-eyebrow">Step ${stepNum} of ${REP_TOTAL} · ${catLabel}</div>
+      <div class="section-eyebrow">Step ${stepNum} of ${ASM_TOTAL} · ${catLabel}</div>
       <div class="section-title">${catLabel}</div>
-      <div class="section-sub">Be honest — there are no wrong answers. Add a note if you want to give more context. ${cat==='technical'?'3 questions.':'5 questions.'}</div>
+      <div class="section-sub">Score ${subject} honestly — there are no wrong answers. Add a note for context if useful. ${cat==='technical'?'3 questions.':'5 questions.'}</div>
     </div>
     ${dims.map(d=>`
     <div class="rubric-card">
@@ -802,13 +727,13 @@ function renderRepDimensions(cat) {
             <span class="score-label">${d.labels[n-1]}</span>
           </button>`).join('')}
         </div>
-        <textarea class="rubric-note" placeholder="Optional: context or example to support your score…" onchange="state.notes['${d.id}']=this.value">${state.notes[d.id]||''}</textarea>
+        <textarea class="rubric-note" placeholder="Optional: context or example to support this score…" onchange="state.notes['${d.id}']=this.value">${state.notes[d.id]||''}</textarea>
       </div>
     </div>`).join('')}
-    <div id="dim-error" class="error-msg" style="display:none;margin-bottom:8px;">Please answer all questions before continuing.</div>
+    <div id="dim-error" class="error-msg" style="display:none;margin-bottom:8px;">Please score all questions before continuing.</div>
     <div class="cta-row">
-      <button class="cta-secondary" onclick="state.step--;renderRepStep()">← Back</button>
-      <button class="cta-primary" onclick="repNextDims('${cat}')">${cat==='soft'?'Submit Assessment →':'Next: Soft Skills →'}</button>
+      <button class="cta-secondary" onclick="state.step--;renderAssessmentStep()">← Back</button>
+      <button class="cta-primary" onclick="asmNextDims('${cat}')">${cat==='soft'?'Submit & View Matrix →':'Next: Soft Skills →'}</button>
     </div>`;
 }
 
@@ -820,284 +745,88 @@ function setScore(dimId, val, btn) {
   if (disp) disp.textContent = val;
 }
 
-function repNextDims(cat) {
+function asmNextDims(cat) {
   const dims = DIMENSIONS.filter(d=>d.cat===cat);
   const missing = dims.filter(d=>!state.scores[d.id]);
   if (missing.length) { document.getElementById('dim-error').style.display='block'; return; }
   document.getElementById('dim-error').style.display='none';
-  state.step++; renderRepStep(); window.scrollTo(0,0);
+  state.step++; renderAssessmentStep(); window.scrollTo(0,0);
 }
 
-async function renderRepSubmit() {
-  document.getElementById('rep-body').innerHTML = `
+async function renderAssessmentSubmit() {
+  document.getElementById('assessment-body').innerHTML = `
     <div class="form-section">
       <div class="section-eyebrow">Submitting…</div>
-      <div class="section-title">Saving Assessment</div>
+      <div class="section-title">Saving & Generating Matrix</div>
       <div style="margin-top:24px;"><span class="spinner"></span> Saving to database…</div>
     </div>`;
-  try {
-    const row = { session_id: state.sessionId, rep_name: state.repName, role: state.role, market: state.market };
-    DIMENSIONS.forEach(d => {
-      row[`${d.id}_${d.cat==='technical'?'ai_tool_literacy':d.id.slice(1)}`] = state.scores[d.id];
-    });
-    // map correctly
-    const scoreRow = {
-      session_id: state.sessionId, rep_name: state.repName, role: state.role, market: state.market,
-      t1_ai_tool_literacy: state.scores.t1, t2_prompt_engineering: state.scores.t2,
-      t3_data_interpretation: state.scores.t3, t4_workflow_integration: state.scores.t4,
-      t5_ai_quality_control: state.scores.t5, t6_agent_concepts: state.scores.t6,
-      s1_critical_thinking: state.scores.s1, s2_complex_communication: state.scores.s2,
-      s3_relationship_depth: state.scores.s3, s4_adaptability: state.scores.s4,
-      s5_sense_making: state.scores.s5, s6_coaching_orientation: state.scores.s6,
-      t1_notes: state.notes.t1||'', t2_notes: state.notes.t2||'', t3_notes: state.notes.t3||'',
-      t4_notes: state.notes.t4||'', t5_notes: state.notes.t5||'', t6_notes: state.notes.t6||'',
-      s1_notes: state.notes.s1||'', s2_notes: state.notes.s2||'', s3_notes: state.notes.s3||'',
-      s4_notes: state.notes.s4||'', s5_notes: state.notes.s5||'', s6_notes: state.notes.s6||'',
-    };
-    const {error} = await db.from('rep_assessments').insert(scoreRow);
-    if (error) throw error;
-    await db.from('sessions').update({status:'rep_submitted', rep_name: state.repName}).eq('id',state.sessionId);
 
-    const techTotal = ['t1','t2','t3'].reduce((a,k)=>a+(state.scores[k]||0),0);
-    const softTotal = ['s1','s2','s3','s4','s5'].reduce((a,k)=>a+(state.scores[k]||0),0);
-
-    document.getElementById('rep-body').innerHTML = `
-      <div class="form-section">
-        <div class="section-eyebrow">✓ Assessment Submitted</div>
-        <div class="section-title">Thank you, ${state.repName.split(' ')[0]}.</div>
-        <div class="section-sub">Your self-assessment has been saved. Your manager will calibrate independently and unlock the joint debrief view. You'll review it together.</div>
-        <div class="totals-row" style="margin-top:32px;">
-          <div class="total-card"><div class="total-label">Technical Score</div><div class="total-val" style="color:var(--accent2);">${techTotal}/12</div><div class="total-sub">3 dimensions · max 12</div></div>
-          <div class="total-card"><div class="total-label">Soft Skills Score</div><div class="total-val" style="color:var(--accent);">${softTotal}/20</div><div class="total-sub">5 dimensions · max 20</div></div>
-          <div class="total-card"><div class="total-label">Session Code</div><div class="total-val" style="font-size:28px;letter-spacing:4px;">${state.sessionCode}</div><div class="total-sub">Share with your manager</div></div>
-        </div>
-        <div class="session-code-box" style="margin-top:0;">
-          <div>
-            <div class="session-code-label">Your Session Code — share with your manager</div>
-            <div class="session-code-val">${state.sessionCode}</div>
-          </div>
-          <button class="copy-btn" onclick="navigator.clipboard.writeText('${state.sessionCode}').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy Code',2000)})">Copy Code</button>
-        </div>
-        <div class="notice success-notice" style="margin-top:16px;">Your scores are hidden until your manager completes their calibration. Share your session code so they can run Module 03 and unlock the joint debrief.</div>
-      </div>
-      <div class="cta-row"><button class="cta-primary" onclick="goHome()">Back to Home</button></div>`;
-  } catch(e) {
-    document.getElementById('rep-body').innerHTML = `
-      <div class="form-section"><div class="section-title">Something went wrong</div>
-      <div class="error-msg">${e.message}</div>
-      <div class="cta-row" style="margin-top:24px;"><button class="cta-primary" onclick="state.step=2;renderRepStep()">← Try Again</button></div></div>`;
-  }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// ══ MANAGER CALIBRATION FLOW ══
-// ─────────────────────────────────────────────────────────────────────────────
-// Steps: 0=code entry, 1=technical, 2=soft, 3=debrief
-const MGR_TOTAL = 4;
-
-function renderManagerStep() {
-  setSteps('mgr-steps', MGR_TOTAL, state.step);
-  const s = state.step;
-  if (s===0) renderMgrCodeEntry();
-  else if (s===1) renderMgrDimensions('technical');
-  else if (s===2) renderMgrDimensions('soft');
-  else if (s===3) renderMgrSubmitAndDebrief();
-}
-
-function renderMgrCodeEntry() {
-  document.getElementById('manager-body').innerHTML = `
-    <div class="form-section">
-      <div class="section-eyebrow">Step 1 of ${MGR_TOTAL}</div>
-      <div class="section-title">Enter Session Code</div>
-      <div class="section-sub">Enter the session code for the rep you want to calibrate. You'll score them independently across 12 dimensions — their scores stay hidden until you submit.</div>
-      <div class="field"><label>Session Code</label><input id="mgr-code-input" type="text" placeholder="e.g. AB12CD" style="text-transform:uppercase;letter-spacing:4px;font-size:20px;" maxlength="6" oninput="this.value=this.value.toUpperCase()"></div>
-      <div class="field"><label>Your Name (Manager)</label><input id="mgr-name-input2" type="text" placeholder="e.g. Carol Tan" value="${state.managerName}" oninput="state.managerName=this.value"></div>
-      <div id="mgr-code-error" class="error-msg" style="display:none;"></div>
-    </div>
-    <div class="cta-row">
-      <button class="cta-primary" onclick="mgrLoadSession()">Load Session →</button>
-    </div>`;
-}
-
-async function mgrLoadSession() {
-  const code = (document.getElementById('mgr-code-input')?.value||'').toUpperCase().trim();
-  const name = state.managerName.trim();
-  const errEl = document.getElementById('mgr-code-error');
-  if (!code||code.length!==6) { errEl.textContent='Enter a valid 6-character session code.'; errEl.style.display='block'; return; }
-  if (!name) { errEl.textContent='Please enter your name.'; errEl.style.display='block'; return; }
-
-  errEl.textContent='Loading session…'; errEl.style.display='block'; errEl.style.color='var(--mid)';
-
-  const {data:sess, error:sErr} = await db.from('sessions').select('*').eq('session_code',code).single();
-  if (sErr||!sess) { errEl.textContent='Session not found. Check the code.'; errEl.style.color='var(--accent)'; errEl.style.display='block'; return; }
-  if (sess.status==='pending') {
-    errEl.textContent='The rep has not yet submitted their self-assessment. Ask them to complete Module 02 first.'; errEl.style.color='var(--accent)'; errEl.style.display='block'; return;
-  }
-
-  const {data:repData, error:rErr} = await db.from('rep_assessments').select('*').eq('session_id',sess.id).single();
-  if (rErr||!repData) { errEl.textContent='Rep assessment not found for this session.'; errEl.style.color='var(--accent)'; errEl.style.display='block'; return; }
-
-  state.calSession = sess; state.calRepData = repData;
-  state.sessionId = sess.id; state.sessionCode = code;
-  state.role = sess.role; state.market = sess.market;
-  errEl.style.display='none';
-  state.step++; renderManagerStep(); window.scrollTo(0,0);
-}
-
-function renderMgrDimensions(cat) {
-  const dims = DIMENSIONS.filter(d=>d.cat===cat);
-  const stepNum = cat==='technical'?2:3;
-  const catLabel = cat==='technical'?'Technical AI Fluency':'Soft Skills';
-  document.getElementById('manager-body').innerHTML = `
-    <div class="form-section">
-      <div class="section-eyebrow">Step ${stepNum} of ${MGR_TOTAL} · Calibrating: ${state.calSession?.rep_name||'Rep'}</div>
-      <div class="section-title">${catLabel}</div>
-      <div class="section-sub">Score <strong>${state.calSession?.rep_name||'the rep'}</strong> independently. You won't see their scores until after you submit. Add coaching notes — these appear in the debrief. ${cat==='technical'?'3 dimensions.':'5 dimensions.'}</div>
-    </div>
-    ${dims.map(d=>`
-    <div class="rubric-card">
-      <div class="rubric-header">
-        <div class="rubric-dim-num">${d.id.toUpperCase()}</div>
-        <div class="rubric-dim-name">${d.name}</div>
-        <div class="rubric-score-display" id="mscore-display-${d.id}">${state.mgrScores[d.id]||'—'}</div>
-      </div>
-      <div class="rubric-body">
-        <div class="rubric-desc">${d.desc}</div>
-        <div class="score-row">
-          ${[1,2,3,4].map(n=>`<button class="score-btn ${state.mgrScores[d.id]===n?'selected':''}" onclick="setMgrScore('${d.id}',${n},this)">
-            <span class="score-num">${n}</span>
-            <span class="score-label">${d.labels[n-1]}</span>
-          </button>`).join('')}
-        </div>
-        <textarea class="rubric-note" placeholder="Coaching note — specific example, development action, or context…" onchange="state.mgrNotes['${d.id}']=this.value">${state.mgrNotes[d.id]||''}</textarea>
-      </div>
-    </div>`).join('')}
-    <div id="mgr-dim-error" class="error-msg" style="display:none;margin-bottom:8px;">Please score all dimensions before continuing.</div>
-    <div class="cta-row">
-      <button class="cta-secondary" onclick="state.step--;renderManagerStep()">← Back</button>
-      <button class="cta-primary" onclick="mgrNextDims('${cat}')">${cat==='soft'?'Submit & View Debrief →':'Next: Soft Skills →'}</button>
-    </div>`;
-}
-
-function setMgrScore(dimId, val, btn) {
-  state.mgrScores[dimId] = val;
-  btn.closest('.score-row').querySelectorAll('.score-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  const disp = document.getElementById('mscore-display-'+dimId);
-  if (disp) disp.textContent = val;
-}
-
-function mgrNextDims(cat) {
-  const dims = DIMENSIONS.filter(d=>d.cat===cat);
-  const missing = dims.filter(d=>!state.mgrScores[d.id]);
-  if (missing.length) { document.getElementById('mgr-dim-error').style.display='block'; return; }
-  document.getElementById('mgr-dim-error').style.display='none';
-  state.step++; renderManagerStep(); window.scrollTo(0,0);
-}
-
-async function renderMgrSubmitAndDebrief() {
-  document.getElementById('manager-body').innerHTML = `
-    <div class="form-section"><div class="section-eyebrow">Saving & generating debrief…</div>
-    <div style="margin-top:24px;"><span class="spinner"></span> Please wait…</div></div>`;
-  try {
-    const calRow = {
-      session_id: state.sessionId, manager_name: state.managerName,
-      t1_ai_tool_literacy: state.mgrScores.t1, t2_prompt_engineering: state.mgrScores.t2,
-      t3_data_interpretation: state.mgrScores.t3, t4_workflow_integration: state.mgrScores.t4,
-      t5_ai_quality_control: state.mgrScores.t5, t6_agent_concepts: state.mgrScores.t6,
-      s1_critical_thinking: state.mgrScores.s1, s2_complex_communication: state.mgrScores.s2,
-      s3_relationship_depth: state.mgrScores.s3, s4_adaptability: state.mgrScores.s4,
-      s5_sense_making: state.mgrScores.s5, s6_coaching_orientation: state.mgrScores.s6,
-      t1_notes: state.mgrNotes.t1||'', t2_notes: state.mgrNotes.t2||'', t3_notes: state.mgrNotes.t3||'',
-      t4_notes: state.mgrNotes.t4||'', t5_notes: state.mgrNotes.t5||'', t6_notes: state.mgrNotes.t6||'',
-      s1_notes: state.mgrNotes.s1||'', s2_notes: state.mgrNotes.s2||'', s3_notes: state.mgrNotes.s3||'',
-      s4_notes: state.mgrNotes.s4||'', s5_notes: state.mgrNotes.s5||'', s6_notes: state.mgrNotes.s6||'',
-    };
-    const {error} = await db.from('manager_calibrations').insert(calRow);
-    if (error) throw error;
-    await db.from('sessions').update({status:'complete', manager_name: state.managerName}).eq('id',state.sessionId);
-    renderDebrief();
-  } catch(e) {
-    document.getElementById('manager-body').innerHTML = `
-      <div class="form-section"><div class="section-title">Something went wrong</div>
-      <div class="error-msg">${e.message}</div>
-      <div class="cta-row" style="margin-top:24px;"><button class="cta-primary" onclick="state.step=2;renderManagerStep()">← Try Again</button></div></div>`;
-  }
-}
-
-function renderDebrief() {
-  const rep = state.calRepData;
-  const repScores = { t1:rep.t1_ai_tool_literacy, t2:rep.t2_prompt_engineering, t3:rep.t3_data_interpretation, t4:rep.t4_workflow_integration, t5:rep.t5_ai_quality_control, t6:rep.t6_agent_concepts, s1:rep.s1_critical_thinking, s2:rep.s2_complex_communication, s3:rep.s3_relationship_depth, s4:rep.s4_adaptability, s5:rep.s5_sense_making, s6:rep.s6_coaching_orientation };
-
-  const repTech = ['t1','t2','t3'].reduce((a,k)=>a+(repScores[k]||0),0);
-  const repSoft = ['s1','s2','s3','s4','s5'].reduce((a,k)=>a+(repScores[k]||0),0);
-  const mgrTech = ['t1','t2','t3'].reduce((a,k)=>a+(state.mgrScores[k]||0),0);
-  const mgrSoft = ['s1','s2','s3','s4','s5'].reduce((a,k)=>a+(state.mgrScores[k]||0),0);
-
-  // Quadrant based on MANAGER scores (calibrated view)
-  const quadrant = mgrTech>=9&&mgrSoft>=15?'accelerator':mgrTech<7&&mgrSoft>=15?'relationship':mgrTech>=9&&mgrSoft<12?'poweruser':'foundation';
+  const techTotal = ['t1','t2','t3'].reduce((a,k)=>a+(state.scores[k]||0),0);
+  const softTotal = ['s1','s2','s3','s4','s5'].reduce((a,k)=>a+(state.scores[k]||0),0);
+  const quadrant = techTotal>=9&&softTotal>=15?'accelerator':techTotal<7&&softTotal>=15?'relationship':techTotal>=9&&softTotal<12?'poweruser':'foundation';
   const q = QUADRANTS[quadrant]; const lp = LEARNING_PATHS[quadrant];
 
-  function deltaTag(r,m) {
-    const d = Math.abs(r-m);
-    if(d===0) return `<span class="delta-badge delta-agree">Agreement</span>`;
-    if(d===1) return `<span class="delta-badge delta-gap">Gap +${d}</span>`;
-    return `<span class="delta-badge delta-big">Gap +${d}</span>`;
+  try {
+    const row = {
+      assessed_name: state.assessedName, assessed_by: state.assessorType,
+      assessor_name: state.assessorType==='manager' ? state.assessorName : state.assessedName,
+      role: state.role, market: state.market,
+      quadrant: quadrant, learning_path: lp.label,
+    };
+    DIMENSIONS.forEach(d => {
+      row[`${d.id}_score`] = state.scores[d.id];
+      row[`${d.id}_notes`] = state.notes[d.id] || '';
+    });
+    const { error } = await db.from('readiness_assessments').insert(row);
+    if (error) throw error;
+    renderMatrix(techTotal, softTotal, quadrant, q, lp);
+  } catch(e) {
+    document.getElementById('assessment-body').innerHTML = `
+      <div class="form-section"><div class="section-title">Something went wrong</div>
+      <div class="error-msg">${e.message}</div>
+      <div class="cta-row" style="margin-top:24px;"><button class="cta-primary" onclick="state.step=2;renderAssessmentStep()">← Try Again</button></div></div>`;
   }
+}
 
+function renderMatrix(techTotal, softTotal, quadrant, q, lp) {
   const dimRows = DIMENSIONS.map(d=>`
-    <div class="debrief-cell left">
-      <div class="dim-name">${d.name}</div>
-      <div class="debrief-scores">
-        <span class="score-pill rep">${repScores[d.id]||'—'}</span>
-        <span style="font-size:11px;color:var(--dim);font-family:var(--narrow);">rep</span>
-        <span style="color:var(--rule);margin:0 4px;">|</span>
-        <span class="score-pill mgr">${state.mgrScores[d.id]||'—'}</span>
-        <span style="font-size:11px;color:var(--dim);font-family:var(--narrow);">mgr</span>
-        ${deltaTag(repScores[d.id]||0, state.mgrScores[d.id]||0)}
+    <div class="dim-result-row">
+      <div>
+        <div class="dim-result-name">${d.name}</div>
+        ${state.notes[d.id] ? `<div class="dim-result-note">${state.notes[d.id]}</div>` : ''}
       </div>
-    </div>
-    <div class="debrief-cell">
-      <div style="font-size:12px;color:var(--mid);line-height:1.6;">${state.mgrNotes[d.id]||'<span style="color:var(--dim);font-style:italic;">No coaching note</span>'}</div>
+      <div class="dim-result-score">${state.scores[d.id]}</div>
     </div>`).join('');
 
-  document.getElementById('manager-body').innerHTML = `
+  document.getElementById('assessment-body').innerHTML = `
     <div class="form-section">
-      <div class="section-eyebrow">✓ Calibration Complete · Joint Debrief</div>
-      <div class="section-title">${rep.rep_name} · ${getRoleName()}</div>
-      <div class="section-sub">${getMarketName()} · Assessed by ${state.managerName}</div>
+      <div class="section-eyebrow">✓ AI Applicability Matrix</div>
+      <div class="section-title">${state.assessedName} · ${getRoleName()}</div>
+      <div class="section-sub">${getMarketName()} · Assessed by ${state.assessorType==='manager' ? state.assessorName+' (Manager)' : state.assessedName+' (Self)'}</div>
     </div>
 
     <div class="totals-row">
       <div class="total-card">
-        <div class="total-label">Technical — Rep / Mgr</div>
-        <div style="display:flex;align-items:baseline;gap:8px;">
-          <div class="total-val" style="color:var(--accent2);">${repTech}</div>
-          <div style="font-size:20px;color:var(--dim);font-family:var(--narrow);">/</div>
-          <div class="total-val" style="color:var(--accent);">${mgrTech}</div>
-        </div>
-        <div class="total-sub">out of 12 each · 3 dimensions</div>
+        <div class="total-label">Technical Score</div>
+        <div class="total-val" style="color:var(--accent2);">${techTotal}</div>
+        <div class="total-sub">out of 12 · 3 dimensions</div>
       </div>
       <div class="total-card">
-        <div class="total-label">Soft Skills — Rep / Mgr</div>
-        <div style="display:flex;align-items:baseline;gap:8px;">
-          <div class="total-val" style="color:var(--accent2);">${repSoft}</div>
-          <div style="font-size:20px;color:var(--dim);font-family:var(--narrow);">/</div>
-          <div class="total-val" style="color:var(--accent);">${mgrSoft}</div>
-        </div>
-        <div class="total-sub">out of 20 each · 5 dimensions</div>
+        <div class="total-label">Soft Skills Score</div>
+        <div class="total-val" style="color:var(--accent);">${softTotal}</div>
+        <div class="total-sub">out of 20 · 5 dimensions</div>
       </div>
       <div class="total-card">
-        <div class="total-label">Session</div>
-        <div class="total-val" style="font-size:26px;letter-spacing:3px;">${state.sessionCode}</div>
-        <div class="total-sub">${state.calSession?.role?.toUpperCase()} · ${state.calSession?.market?.toUpperCase()}</div>
+        <div class="total-label">Recommended Path</div>
+        <div class="total-val" style="font-size:26px;">${lp.label}</div>
+        <div class="total-sub">${lp.title}</div>
       </div>
     </div>
 
     <div class="quadrant-box">
       <div class="quadrant-icon">${q.icon}</div>
       <div>
-        <div class="quadrant-label">Calibrated Quadrant</div>
+        <div class="quadrant-label">Quadrant</div>
         <div class="quadrant-name">${q.name}</div>
         <div class="quadrant-desc">${q.desc}</div>
       </div>
@@ -1111,10 +840,8 @@ function renderDebrief() {
 
     <div class="divider"></div>
 
-    <div style="font-family:var(--narrow);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;">Dimension-by-Dimension Comparison</div>
-    <div class="debrief-grid">
-      <div class="debrief-col-header" style="color:var(--accent2);">Rep Self-Score · Manager Score · Delta</div>
-      <div class="debrief-col-header" style="color:var(--accent);">Manager Coaching Notes</div>
+    <div style="font-family:var(--narrow);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;">Dimension-by-Dimension Scores</div>
+    <div style="border:1px solid var(--rule);">
       ${dimRows}
     </div>
 
